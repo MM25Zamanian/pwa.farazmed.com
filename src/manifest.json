@@ -14,13 +14,13 @@
       "src": "/images/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
       "src": "/images/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
       "src": "/images/icon-144x144.png",
@@ -38,13 +38,13 @@
       "src": "/images/icon-284x284.png",
       "sizes": "284x284",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "monochrome"
     },
     {
       "src": "/images/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "monochrome"
     }
   ]
 }
