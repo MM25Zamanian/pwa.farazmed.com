@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: 'Dependency Review'
+name: Dependency Review
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ jobs:
       contents: read
 
     steps:
-      - name: 'Checkout Repository'
+      - name: ⤵️ Checkout repository
         uses: actions/checkout@v3
 
-      - name: 'Dependency Review'
+      - name: 🚀 Dependency Review
         uses: actions/dependency-review-action@v2
