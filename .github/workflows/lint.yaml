@@ -54,5 +54,4 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: 🚀 Run ESLint
-        run: yarn lint:ts
-          --format @microsoft/eslint-formatter-sarif
+        run: yarn lint
