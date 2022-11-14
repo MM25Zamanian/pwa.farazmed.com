@@ -1,13 +1,15 @@
 import {rollupPluginHTML} from '@web/rollup-plugin-html';
 import {polyfillsLoader} from '@web/rollup-plugin-polyfills-loader';
 import resolve from '@rollup/plugin-node-resolve';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+import pkgMinifyHTML from 'rollup-plugin-minify-html-literals';
 import summary from 'rollup-plugin-summary';
 import {getBabelOutputPlugin} from '@rollup/plugin-babel';
 import {terser} from 'rollup-plugin-terser';
 import {copy} from '@web/rollup-plugin-copy';
 import {generateSW} from 'rollup-plugin-workbox';
 import workboxConfig from './workbox-config.js';
+
+const minifyHTML = pkgMinifyHTML.default
 
 function onwarn(warning) {
   if (warning.code !== 'THIS_IS_UNDEFINED') {
