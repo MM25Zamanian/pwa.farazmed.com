@@ -132,7 +132,8 @@
 //         return this._renderBanner(bannerRow.banners[0]);
 //       }
 
-//       return html` <div class="banners-group">${map(bannerRow.banners, (banner) => this._renderBanner(banner))}</div> `;
+//       return html` <div class="banners-group">
+// ${map(bannerRow.banners, (banner) => this._renderBanner(banner))}</div> `;
 //     });
 
 //     return html` <div class="banners">${bannerRowsTemplate}</div> `;
