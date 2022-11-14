@@ -1,0 +1,36 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+# OSX
+.DS_STORE
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log*
+
+# Build
+build
+android
+.tsbuildinfo
+src/**/*.js
+src/**/*.map
+src/**/*.d.ts
+
+# Dependencies
+node_modules
+package-lock.json
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
