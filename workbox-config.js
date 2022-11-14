@@ -8,7 +8,7 @@ export default {
   runtimeCaching: [
     {
       urlPattern: new RegExp('(.*).(.jpg|.jpeg|.jfif|.pjpeg|.pjp|.png|.svg|.ico)'),
-      handler: 'NetworkFirst',
+      handler: 'CacheFirst',
       options: {
         cacheName: 'images',
         backgroundSync: {
@@ -24,18 +24,8 @@ export default {
       },
     },
     {
-      urlPattern: new RegExp('(.*)(.json)'),
-      handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'data',
-        backgroundSync: {
-          name: 'external-cache-sync',
-        },
-      },
-    },
-    {
       urlPattern: new RegExp('(.*)(.js)'),
-      handler: 'StaleWhileRevalidate',
+      handler: 'CacheFirst',
       options: {
         cacheName: 'ionic-js',
       },
