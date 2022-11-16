@@ -41,9 +41,9 @@ export class ProductCard extends AppElement {
       ion-card ion-card-header ion-card-title {
         font-size: 14px;
         font-weight: 300;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      }
+      img {
+        padding: .5em 1em 0;
       }
     `,
     css`

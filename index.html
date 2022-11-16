@@ -45,7 +45,11 @@
       <app-index></app-index>
     </ion-app>
 
-    <!-- <script type="module" src="node_modules/@ionic/core/dist/ionic/ionic.esm.js"></script> -->
+    <script type="module">
+      window?.addEventListener('load', () => {
+        document?.querySelector('html')?.classList?.add('hydrated');
+      });
+    </script>
     <script type="module" src="src/app-index.js"></script>
 
     <noscript>

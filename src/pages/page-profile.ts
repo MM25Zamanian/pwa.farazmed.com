@@ -1,4 +1,5 @@
 import {fetch, getJson} from '@alwatr/fetch';
+import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
 import {Task} from '@lit-labs/task';
@@ -19,8 +20,8 @@ import type {AddressInterface} from '../types/address';
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {FavoriteProductInterface} from '../types/product';
 import type {UserInterface} from '../types/user';
-import type {ListenerInterface} from '@alwatr/signal';
 import type {TemplateResult, CSSResult} from 'lit';
+
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -233,7 +234,14 @@ export class PageProfile extends AppElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
-    // this._listenerList.push(router.signal.addListener(() => this.requestUpdate()));
+
+    preloadIcon('person-outline');
+    preloadIcon('call-outline');
+    preloadIcon('card-outline');
+    preloadIcon('log-out-outline');
+    preloadIcon('add-outline');
+    preloadIcon('close-outline');
+    preloadIcon('arrow-forward-outline');
 
     if (localStorage.getItem('token') == null) {
       router.signal.request({
@@ -242,10 +250,6 @@ export class PageProfile extends AppElement {
         }),
       });
     }
-  }
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this._listenerList.forEach((listener) => (listener as ListenerInterface<keyof AlwatrSignals>).remove());
   }
   override render(): TemplateResult {
     return html`
@@ -321,7 +325,7 @@ export class PageProfile extends AppElement {
   protected _renderInformationCard(information: UserInterface): TemplateResult {
     const itemTemplate = (icon: string, name: string, value: string): TemplateResult => html`
       <ion-item>
-        <ion-icon slot="start" name="${icon}-outline" class="ion-margin-end"></ion-icon>
+        <alwatr-icon flip-rtl dir="rtl" slot="start" name="${icon}-outline" class="ion-margin-end"></alwatr-icon>
         <ion-label class="ion-margin-end">
           <ion-text color="dark">
             <h4>${name}</h4>
@@ -350,7 +354,7 @@ export class PageProfile extends AppElement {
 
             <ion-buttons slot="end">
               <ion-button color="tertiary" href=${router.makeUrl({sectionList: ['profile-edit']})}>
-                <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+                <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="settings-outline"></alwatr-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>
@@ -369,7 +373,7 @@ export class PageProfile extends AppElement {
             color="danger"
             @click=${logout}
           >
-            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <alwatr-icon flip-rtl dir="rtl" slot="start" name="log-out-outline"></alwatr-icon>
             <ion-label>خروج</ion-label>
           </ion-button>
         </ion-card-content>
@@ -389,7 +393,7 @@ export class PageProfile extends AppElement {
 
             <ion-buttons slot="end">
               <ion-button color="tertiary">
-                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="add-outline"></alwatr-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>
@@ -427,7 +431,7 @@ export class PageProfile extends AppElement {
 
         <ion-buttons slot="end" class="ion-no-margin">
           <ion-button color="danger" @click=${delAddress}>
-            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="close-outline"></alwatr-icon>
           </ion-button>
         </ion-buttons>
       </ion-item>
@@ -446,7 +450,7 @@ export class PageProfile extends AppElement {
 
             <ion-buttons slot="end">
               <ion-button color="tertiary">
-                <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+                <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="arrow-forward-outline"></alwatr-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>
@@ -479,7 +483,7 @@ export class PageProfile extends AppElement {
 
         <ion-buttons slot="end" class="ion-no-margin">
           <ion-button color="danger" @click=${delFavorite}>
-            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="close-outline"></alwatr-icon>
           </ion-button>
         </ion-buttons>
       </ion-item>
@@ -499,7 +503,7 @@ export class PageProfile extends AppElement {
 
             <ion-buttons slot="end">
               <ion-button color="tertiary">
-                <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+                <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="arrow-forward-outline"></alwatr-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>

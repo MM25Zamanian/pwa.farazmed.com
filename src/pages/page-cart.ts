@@ -1,4 +1,5 @@
 import {getJson, fetch} from '@alwatr/fetch';
+import {preloadIcon} from '@alwatr/icon';
 import {Task} from '@lit-labs/task';
 import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
@@ -79,7 +80,6 @@ export class PageCart extends AppElement {
     `,
   ];
 
-  protected _listenerList: Array<unknown> = [];
   protected _cartTask = new Task(
     this,
     async (): Promise<FetchData<CartInterface>> => {
@@ -136,6 +136,12 @@ export class PageCart extends AppElement {
     this._cartTask.run();
   });
 
+  override connectedCallback(): void {
+    super.connectedCallback();
+
+    preloadIcon('close-outline');
+    preloadIcon('card-outline');
+  }
   override render(): TemplateResult {
     return html`
       <ion-header>
@@ -203,7 +209,7 @@ export class PageCart extends AppElement {
 
         <ion-buttons slot="end">
           <ion-button color="danger" @click=${delCart}>
-            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+            <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="close-outline"></alwatr-icon>
           </ion-button>
         </ion-buttons>
       </ion-item>
@@ -243,7 +249,7 @@ export class PageCart extends AppElement {
           </ion-item>
         </ion-list>
         <ion-button expand="block" color="success" class="ion-margin-horizontal ion-margin-bottom">
-          <ion-icon name="card-outline" slot="start"></ion-icon>
+          <alwatr-icon flip-rtl dir="rtl" name="card-outline" slot="start"></alwatr-icon>
           <ion-label>پرداخت</ion-label>
         </ion-button>
       </ion-card>

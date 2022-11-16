@@ -87,17 +87,17 @@ const reset = css`
   .ion-tappable,
   [tappable],
   [tappable] div,
-  [tappable] ion-icon,
+  [tappable] alwatr-icon,
   [tappable] ion-label,
   [tappable] span,
   a,
   a div,
-  a ion-icon,
+  a alwatr-icon,
   a ion-label,
   a span,
   button,
   button div,
-  button ion-icon,
+  button alwatr-icon,
   button ion-label,
   button span,
   input,
@@ -233,6 +233,10 @@ const reset = css`
 
   sub {
     bottom: -0.25em;
+  }
+
+  alwatr-icon {
+    font-size: 24px;
   }
 `;
 

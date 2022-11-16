@@ -1,4 +1,5 @@
 import {getJson} from '@alwatr/fetch';
+import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {Task} from '@lit-labs/task';
 import {css, html, nothing} from 'lit';
@@ -11,13 +12,11 @@ import {when} from 'lit/directives/when.js';
 import {AppElement} from '../helpers/app-element';
 
 import '../components/pc-ard';
-import '../components/m-odal-filter';
-import '../components/m-odal-search';
 
 import type {Links, ResponseProducts} from '../types/fetch';
 import type {ProductInterface} from '../types/product';
-import type {ListenerInterface} from '@alwatr/signal';
 import type {TemplateResult, CSSResult} from 'lit';
+
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -101,10 +100,10 @@ export class PageProductList extends AppElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
-  }
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this._listenerList.forEach((listener) => (listener as ListenerInterface<keyof AlwatrSignals>).remove());
+
+    preloadIcon('filter-outline');
+    preloadIcon('chevron-back-outline');
+    preloadIcon('chevron-forward-outline');
   }
   override render(): TemplateResult {
     return html`
@@ -157,7 +156,7 @@ export class PageProductList extends AppElement {
       <ion-toolbar color="secondary">
         <ion-buttons slot="primary">
           <ion-button>
-            <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+            <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="filter-outline"></alwatr-icon>
           </ion-button>
         </ion-buttons>
 
@@ -204,7 +203,7 @@ export class PageProductList extends AppElement {
 
     return html`
       <ion-button shape="round" @click=${click} ?disabled=${disabled}>
-        <ion-icon slot=${slotIcon} name=${icon}></ion-icon>
+        <alwatr-icon flip-rtl dir="rtl" slot=${slotIcon} name=${icon}></alwatr-icon>
         <ion-label>${label}</ion-label>
       </ion-button>
     `;

@@ -88,6 +88,15 @@ const reset = css`
   ion-input input::-webkit-date-and-time-value {
     text-align: start;
   }
+
+  alwatr-icon[slot='start'] {
+    margin-inline-start: -0.4em;
+    margin-inline-end: 0.4em;
+  }
+  alwatr-icon[slot='end'] {
+    margin-inline-end: -0.4em;
+    margin-inline-start: 0.4em;
+  }
 `;
 
 export default reset;

@@ -1,4 +1,5 @@
 import {getJson, fetch} from '@alwatr/fetch';
+import {preloadIcon} from '@alwatr/icon';
 import {isNumber} from '@alwatr/math';
 import {router} from '@alwatr/router';
 import {Task} from '@lit-labs/task';
@@ -149,6 +150,11 @@ export class PageProductDetail extends AppElement {
     });
   });
 
+  override connectedCallback(): void {
+    super.connectedCallback();
+
+    preloadIcon('add-outline');
+  }
   override render(): TemplateResult {
     return html`
       ${this._apiTask.render({
@@ -216,7 +222,7 @@ export class PageProductDetail extends AppElement {
       <ion-footer>
         <ion-toolbar>
           <ion-button slot="start" fill="solid" color="primary" expand="block" @click=${addCart}>
-            <ion-icon slot="start" name="add"></ion-icon>
+            <alwatr-icon flip-rtl dir="rtl" slot="start" name="add-outline"></alwatr-icon>
             <ion-label>افزودن به سبد خرید</ion-label>
           </ion-button>
 

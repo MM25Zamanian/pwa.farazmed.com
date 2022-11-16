@@ -1,4 +1,5 @@
 import {fetch, getJson} from '@alwatr/fetch';
+import { preloadIcon } from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
 import {InputCustomEvent, loadingController} from '@ionic/core';
@@ -11,7 +12,6 @@ import {responseMessage} from '../utilities/response-message';
 
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {UserInterface} from '../types/user';
-import type {ListenerInterface} from '@alwatr/signal';
 import type {TemplateResult, CSSResult} from 'lit';
 
 declare global {
@@ -83,11 +83,8 @@ export class PageProfileEdit extends AppElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
-    // this._listenerList.push(router.signal.addListener(() => this.requestUpdate()));
-  }
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this._listenerList.forEach((listener) => (listener as ListenerInterface<keyof AlwatrSignals>).remove());
+
+    preloadIcon('arrow-forward-outline');
   }
   override render(): TemplateResult {
     return html`
@@ -95,7 +92,7 @@ export class PageProfileEdit extends AppElement {
         <ion-toolbar color="secondary">
           <ion-buttons slot="end">
             <ion-button href=${router.makeUrl({sectionList: ['profile']})}>
-              <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+              <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="arrow-forward-outline"></alwatr-icon>
             </ion-button>
           </ion-buttons>
 

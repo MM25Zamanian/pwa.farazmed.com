@@ -1,9 +1,10 @@
+import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
 import {initialize} from '@ionic/core/components';
 import {css, html, nothing} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
-import {ifDefined} from 'lit/directives/if-defined.js';
+import {cache} from 'lit/directives/cache.js';
 
 import {AppElement} from './helpers/app-element';
 import {defineCustomElement} from './ionic-define-elements';
@@ -18,9 +19,6 @@ declare global {
     'app-index': AppIndex;
   }
 }
-
-initialize();
-defineCustomElement();
 
 /**
  * APP PWA Root Element
@@ -94,6 +92,9 @@ export class AppIndex extends AppElement {
 
   constructor() {
     super();
+
+    initialize();
+    defineCustomElement();
     router.initial();
   }
 
@@ -113,6 +114,15 @@ export class AppIndex extends AppElement {
   override connectedCallback(): void {
     super.connectedCallback();
 
+    Object.keys(routes).map((slug) => {
+      const icon = routes[slug].icon;
+
+      if (icon != null) {
+        preloadIcon(icon);
+        preloadIcon(icon + '-outline');
+      }
+    });
+
     this._listenerList.push(
       router.signal.addListener(
         (route) => {
@@ -129,8 +139,8 @@ export class AppIndex extends AppElement {
   }
   override render(): TemplateResult {
     return html`
-      <ion-content class="page-container"> ${router.outlet(this._routes)} </ion-content>
-      ${this._renderTabBar()}
+      <ion-content class="page-container"> ${cache(router.outlet(this._routes))} </ion-content>
+      ${cache(this._renderTabBar())}
     `;
   }
 
@@ -142,7 +152,7 @@ export class AppIndex extends AppElement {
 
       const selected = this._activePage === slug;
       const iconTemplate = route.icon
-        ? html` <ion-icon name=${ifDefined(selected ? route.icon : route.icon + '-outline')}></ion-icon> `
+        ? html` <alwatr-icon flip-rtl dir="rtl" .name=${selected ? route.icon : route.icon + '-outline'}></alwatr-icon> `
         : nothing;
 
       return html`
@@ -151,8 +161,8 @@ export class AppIndex extends AppElement {
           ?selected=${selected}
           ?hidden=${!route.show_in_bar}
         >
-          <ion-label>${route.title}</ion-label>
           ${iconTemplate}
+          <ion-label>${route.title}</ion-label>
         </ion-tab-button>
       `;
     });
