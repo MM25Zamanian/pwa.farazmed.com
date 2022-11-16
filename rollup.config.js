@@ -1,11 +1,28 @@
 import {rollupPluginHTML} from '@web/rollup-plugin-html';
 import {polyfillsLoader} from '@web/rollup-plugin-polyfills-loader';
 import resolve from '@rollup/plugin-node-resolve';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+import minifyHTMLpkg from 'rollup-plugin-minify-html-literals';
 import summary from 'rollup-plugin-summary';
 import {getBabelOutputPlugin} from '@rollup/plugin-babel';
 import {terser} from 'rollup-plugin-terser';
-import {copy} from '@web/rollup-plugin-copy';
+import copy from 'rollup-plugin-copy';
+import {generateSW} from 'rollup-plugin-workbox';
+
+const DIST_PATH = 'dist';
+const WORKBOX_CONFIG = {
+  globPatterns: ['**/*.{html,css,js,json,png,jpg,js,woff2,woff}'],
+  clientsClaim: true,
+  skipWaiting: true,
+  runtimeCaching: [
+    {
+      urlPattern: new RegExp('(.*).(.jpg|.jpeg|.jfif|.pjpeg|.pjp|.png|.svg|.ico|.js|.woff|.woff2)'),
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'other-cache',
+      },
+    },
+  ],
+};
 
 function onwarn(warning) {
   if (warning.code !== 'THIS_IS_UNDEFINED') {
@@ -16,8 +33,13 @@ function onwarn(warning) {
 // Configure an instance of @web/rollup-plugin-html
 const htmlPlugin = rollupPluginHTML({
   rootDir: './',
-  extractAssets: true,
+  minify: true,
+  flattenOutput: true,
+  publicPath: '/',
+  injectServiceWorker: true,
+  serviceWorkerPath: DIST_PATH + '/sw.js',
 });
+const minifyHTML = minifyHTMLpkg.default;
 
 export default {
   input: 'index.html',
@@ -25,11 +47,8 @@ export default {
   treeshake: true,
   plugins: [
     htmlPlugin,
-
     resolve(), // Resolve bare module specifiers to relative paths
-
     minifyHTML(), // Minify HTML template literals
-
     terser({
       // Minify JS
       ecma: 2020,
@@ -41,7 +60,6 @@ export default {
         },
       },
     }),
-
     polyfillsLoader({
       modernOutput: {
         name: 'modern',
@@ -72,14 +90,27 @@ export default {
         ],
       },
     }),
-
     summary({showMinifiedSize: false}), // Print bundle summary
-
     copy({
-      patterns: ['localization/**/*'],
+      targets: [
+        {
+          src: 'images',
+          dest: DIST_PATH,
+        },
+        {
+          src: 'node_modules/@alwatr/font/vazirmatn',
+          dest: DIST_PATH + '/assets',
+        },
+      ],
+    }),
+    generateSW({
+      swDest: DIST_PATH + '/sw.js',
+      globDirectory: DIST_PATH,
+      navigateFallback: '/index.html',
+
+      ...WORKBOX_CONFIG,
     }),
   ],
-
   output: [
     {
       // Modern JS bundles (no JS compilation, ES module output)
@@ -115,6 +146,5 @@ export default {
       ],
     },
   ],
-
   preserveEntrySignatures: false, // https://rollupjs.org/guide/en/#preserveentrysignatures
 };

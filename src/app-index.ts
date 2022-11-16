@@ -152,7 +152,9 @@ export class AppIndex extends AppElement {
 
       const selected = this._activePage === slug;
       const iconTemplate = route.icon
-        ? html` <alwatr-icon flip-rtl dir="rtl" .name=${selected ? route.icon : route.icon + '-outline'}></alwatr-icon> `
+        ? html`
+            <alwatr-icon flip-rtl dir="rtl" .name=${selected ? route.icon : route.icon + '-outline'}></alwatr-icon>
+          `
         : nothing;
 
       return html`
