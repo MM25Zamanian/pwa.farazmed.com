@@ -26,7 +26,11 @@
     "src/**/*.map": true,
     "src/**/*.js": true,
     "src/**/*.d.ts": true,
-    "src/**/*.tsbuildinfo": true
+    "src/**/*.tsbuildinfo": true,
+    "scripts/**/*.map": true,
+    "scripts/**/*.js": true,
+    "scripts/**/*.d.ts": true,
+    "scripts/**/*.tsbuildinfo": true
   },
   "docwriter.style": "JSDoc",
   "docwriter.progress.trackMethods": true,

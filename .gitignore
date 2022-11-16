@@ -14,7 +14,7 @@ Desktop.ini
 *.log*
 
 # Build
-build
+dist
 android
 .tsbuildinfo
 src/**/*.js

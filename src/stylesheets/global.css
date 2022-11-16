@@ -1,18 +1,7 @@
-@font-face {
-  font-family: 'Vazirmatn';
-  font-style: normal;
-  font-weight: 100 900;
-  font-stretch: 100%;
-  src: url(https://cdn.jsdelivr.net/npm/vazirmatn@32.101.0/fonts/webfonts/Vazirmatn[wght].woff2) format('woff2');
-  font-display: block;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+1EE00-1EEFF;
-}
-
-html.md {
-  --ion-default-font: 'Vazirmatn', 'Roboto', 'Helvetica Neue', sans-serif;
-}
+/* @import '/node_modules/@alwatr/font/vazirmatn.css'; */
 
 html {
+  --ion-default-font: var(--font-vazirmatn);
   --ion-font-family: var(--ion-default-font);
 }
 
@@ -44,12 +33,12 @@ html {
   --ion-color-tertiary-shade: #5c00a6;
   --ion-color-tertiary-tint: #771ac4;
 
-	--ion-color-success: #1d9f4b;
-	--ion-color-success-rgb: 29,159,75;
-	--ion-color-success-contrast: #ffffff;
-	--ion-color-success-contrast-rgb: 255,255,255;
-	--ion-color-success-shade: #1a8c42;
-	--ion-color-success-tint: #34a95d;
+  --ion-color-success: #1d9f4b;
+  --ion-color-success-rgb: 29, 159, 75;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #1a8c42;
+  --ion-color-success-tint: #34a95d;
 
   --ion-color-warning: #f0b800;
   --ion-color-warning-rgb: 240, 184, 0;

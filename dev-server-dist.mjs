@@ -1,4 +1,4 @@
 import config  from "./dev-server.mjs";
-config.rootDir = './build';
-config.appIndex = './build/'
+config.rootDir = './dist';
+config.appIndex = './dist/'
 export default config;

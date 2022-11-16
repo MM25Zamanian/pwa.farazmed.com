@@ -14,13 +14,6 @@
     <link rel="preconnect" href="https://polyfill.io/" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.gstatic.com/s/notosansarabic/v14/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj4wv4rqxzLI.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
 
     <link rel="icon" href="images/icon-192x192.png" />
     <meta name="theme-color" content="#4c00b8" />
@@ -45,22 +38,15 @@
     <meta name="msapplication-TileColor" content="#4c00b8" />
     <meta name="msapplication-tap-highlight" content="no" />
 
-    <link rel="stylesheet" href="./src/stylesheets/global.css" />
+    <link rel="stylesheet" href="src/stylesheets/global.css" />
   </head>
   <body>
     <ion-app>
       <app-index></app-index>
     </ion-app>
 
-    <script>
-      window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-    </script>
-
-    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.toggleAttribute"></script> -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@6/dist/ionic/ionic.esm.js"></script>
+    <!-- <script type="module" src="node_modules/@ionic/core/dist/ionic/ionic.esm.js"></script> -->
     <script type="module" src="src/app-index.js"></script>
-
-    <!-- <script nomodule defer src="https://cdn.jsdelivr.net/npm/@ionic/core@6/dist/ionic/ionic.js"></script> -->
 
     <noscript>
       <div class="noscript">

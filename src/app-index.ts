@@ -1,18 +1,13 @@
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
-import {registerTranslation} from '@shoelace-style/localize/dist/index.js';
+import {initialize} from '@ionic/core/components';
 import {css, html, nothing} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 import {ifDefined} from 'lit/directives/if-defined.js';
 
-import {loadData} from './director';
 import {AppElement} from './helpers/app-element';
+import {defineCustomElement} from './ionic-define-elements';
 import routes from './router/routes';
-import en from './translation/en';
-import fa from './translation/fa';
-import registerSW from './utilities/register-sw';
-
-import './utilities/db';
 
 import type {RoutesConfig} from '@alwatr/router';
 import type {ListenerInterface} from '@alwatr/signal';
@@ -23,6 +18,9 @@ declare global {
     'app-index': AppIndex;
   }
 }
+
+initialize();
+defineCustomElement();
 
 /**
  * APP PWA Root Element
@@ -114,10 +112,6 @@ export class AppIndex extends AppElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
-
-    registerTranslation(en, fa);
-    registerSW();
-    loadData.appData();
 
     this._listenerList.push(
       router.signal.addListener(
