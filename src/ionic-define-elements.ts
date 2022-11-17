@@ -1,5 +1,6 @@
 import {defineCustomElement as ionApp} from '@ionic/core/components/ion-app.js';
 import {defineCustomElement as ionAvatar} from '@ionic/core/components/ion-avatar.js';
+import {defineCustomElement as ionBackdrop} from '@ionic/core/components/ion-backdrop.js';
 import {defineCustomElement as ionButton} from '@ionic/core/components/ion-button.js';
 import {defineCustomElement as ionButtons} from '@ionic/core/components/ion-buttons.js';
 import {defineCustomElement as ionCardContent} from '@ionic/core/components/ion-card-content.js';
@@ -17,6 +18,8 @@ import {defineCustomElement as ionItem} from '@ionic/core/components/ion-item.js
 import {defineCustomElement as ionLabel} from '@ionic/core/components/ion-label.js';
 import {defineCustomElement as ionListHeader} from '@ionic/core/components/ion-list-header.js';
 import {defineCustomElement as ionList} from '@ionic/core/components/ion-list.js';
+import {defineCustomElement as ionLoading} from '@ionic/core/components/ion-loading.js';
+import {defineCustomElement as ionModal} from '@ionic/core/components/ion-modal.js';
 import {defineCustomElement as ionNote} from '@ionic/core/components/ion-note.js';
 import {defineCustomElement as ionRadioGroup} from '@ionic/core/components/ion-radio-group.js';
 import {defineCustomElement as ionRadio} from '@ionic/core/components/ion-radio.js';
@@ -31,6 +34,7 @@ import {defineCustomElement as ionTabButton} from '@ionic/core/components/ion-ta
 import {defineCustomElement as ionText} from '@ionic/core/components/ion-text.js';
 import {defineCustomElement as ionThumbnail} from '@ionic/core/components/ion-thumbnail.js';
 import {defineCustomElement as ionTitle} from '@ionic/core/components/ion-title.js';
+import {defineCustomElement as ionToast} from '@ionic/core/components/ion-toast.js';
 import {defineCustomElement as ionToolbar} from '@ionic/core/components/ion-toolbar.js';
 
 export const defineCustomElement = (): void => {
@@ -68,4 +72,8 @@ export const defineCustomElement = (): void => {
   ionThumbnail();
   ionTitle();
   ionToolbar();
+  ionLoading();
+  ionToast();
+  ionModal();
+  ionBackdrop();
 };

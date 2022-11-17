@@ -1,16 +1,19 @@
-import {SignalInterface} from '@alwatr/signal';
+import {toastController} from '@ionic/core';
 
 import type {FetchData, FetchJson} from '../types/fetch';
 
-const toastMessageSignal = new SignalInterface('toast-message');
-
-export function responseMessage<T>(data: FetchData<T> | FetchJson<'error'>): FetchData<T> | FetchJson<'error'> {
+export async function responseMessage<T>(
+  data: FetchData<T> | FetchJson<'error'>
+): Promise<FetchData<T> | FetchJson<'error'>> {
   if (data != null && data?.message && typeof data.message === 'string') {
-    toastMessageSignal.request({
-      duration: 10_000,
-      message: data.message,
-      icon: data.status === 'success' ? 'checkmark-circle-outline' : 'warning-outline',
-    });
+    await toastController
+      .create({
+        animated: true,
+        duration: 4_096,
+        position: 'bottom',
+        message: data.message,
+      })
+      .then((toast) => toast.present());
   }
   return data;
 }

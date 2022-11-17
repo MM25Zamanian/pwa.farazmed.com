@@ -47,6 +47,7 @@
     "@vaadin/number-field": "^23.2.8",
     "@webcomponents/webcomponentsjs": "^2.7.0",
     "idb": "^7.1.1",
+    "ionicons": "^6.0.4",
     "lit": "^2.4.1",
     "pwa-helper-components": "^0.2.10",
     "tslib": "^2.4.1"

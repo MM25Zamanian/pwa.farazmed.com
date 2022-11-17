@@ -7,6 +7,7 @@ export interface CartInterface extends Record<string, unknown> {
 }
 
 export interface ProductCart {
+  cart_id: number;
   ProductInfo: ProductInterface;
   ProductVariantInfo: ProductVariantInfo;
   variantAttrInfo: VariantAttrInfo;

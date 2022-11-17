@@ -7,7 +7,6 @@ import '../pages/page-product-list';
 import '../pages/page-product-detail';
 import '../pages/page-login';
 import '../pages/page-profile';
-import '../pages/page-profile-edit';
 import '../pages/page-cart';
 
 const routes: Record<string, Route> = {
@@ -43,14 +42,6 @@ const routes: Record<string, Route> = {
     },
     render: () => {
       return html`<page-profile class="ion-page"></page-profile>`;
-    },
-  },
-  'profile-edit': {
-    title: 'ویرایش پروفایل',
-    icon: 'person',
-    show_in_bar: false,
-    render: () => {
-      return html`<page-profile-edit class="ion-page"></page-profile-edit>`;
     },
   },
   'log-in': {

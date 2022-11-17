@@ -2,6 +2,7 @@ import {fetch, getJson} from '@alwatr/fetch';
 import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
+import {modalController} from '@ionic/core';
 import {Task} from '@lit-labs/task';
 import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
@@ -15,13 +16,13 @@ import {phoneNumberFormat} from '../utilities/phone-number';
 import {responseMessage} from '../utilities/response-message';
 
 import '../components/pc-ard';
+import '../components/add-address-modal';
 
 import type {AddressInterface} from '../types/address';
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {FavoriteProductInterface} from '../types/product';
 import type {UserInterface} from '../types/user';
 import type {TemplateResult, CSSResult} from 'lit';
-
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -57,6 +58,9 @@ export class PageProfile extends AppElement {
       ion-item.address span {
         display: inline-block;
         white-space: normal;
+      }
+      ion-item.address span.number {
+        direction: ltr;
       }
       ion-item.images ion-row {
         padding-bottom: 8px;
@@ -353,7 +357,7 @@ export class PageProfile extends AppElement {
             <ion-card-title>اطلاعات کاربر</ion-card-title>
 
             <ion-buttons slot="end">
-              <ion-button color="tertiary" href=${router.makeUrl({sectionList: ['profile-edit']})}>
+              <ion-button color="tertiary">
                 <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="settings-outline"></alwatr-icon>
               </ion-button>
             </ion-buttons>
@@ -384,6 +388,7 @@ export class PageProfile extends AppElement {
     const addressItemsTemplate = map(addressList, (address, index) =>
       this._renderAddressItem(address, index, addressList.length)
     );
+    const addAddressOpen = this._openModalFunc('add-address-modal');
 
     return html`
       <ion-card>
@@ -392,7 +397,7 @@ export class PageProfile extends AppElement {
             <ion-card-title>آدرس ها</ion-card-title>
 
             <ion-buttons slot="end">
-              <ion-button color="tertiary">
+              <ion-button color="tertiary" @click=${addAddressOpen}>
                 <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="add-outline"></alwatr-icon>
               </ion-button>
             </ion-buttons>
@@ -421,7 +426,7 @@ export class PageProfile extends AppElement {
           </h4>
           <h4>
             <ion-text color="medium"> شماره تحویل گیرنده: </ion-text>
-            <span>${phoneNumberFormat(address.tel)}</span>
+            <span class="number">${phoneNumberFormat(address.tel)}</span>
           </h4>
           <h4>
             <ion-text color="medium"> آدرس: </ion-text>
@@ -489,7 +494,6 @@ export class PageProfile extends AppElement {
       </ion-item>
     `;
   }
-
   protected _renderOrderListCard(orderList: OrderInterface[]): TemplateResult {
     const orderListTemplate = map(orderList.slice(0, 12), (order, index) =>
       this._renderOrderItem(order, index, orderList.length)
@@ -534,5 +538,23 @@ export class PageProfile extends AppElement {
         <ion-row> ${productImagesTemplate} </ion-row>
       </ion-item>
     `;
+  }
+  protected _openModalFunc(component: string): (event: PointerEvent) => void {
+    return (event: PointerEvent): void => {
+      event.preventDefault();
+
+      const modalComponent = document.createElement(component);
+      modalController
+        .create({
+          component: modalComponent,
+          animated: true,
+        })
+        .then(async (modal) => {
+          modalComponent.addEventListener('close', () => {
+            modal.dismiss();
+          });
+          return await modal.present();
+        });
+    };
   }
 }

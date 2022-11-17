@@ -16,12 +16,12 @@ import type {TemplateResult, CSSResult} from 'lit';
 
 declare global {
   interface HTMLElementTagNameMap {
-    'page-profile-edit': PageProfileEdit;
+    'edit-profile-modal': EditProfileModal;
   }
 }
 
-@customElement('page-profile-edit')
-export class PageProfileEdit extends AppElement {
+@customElement('edit-profile-modal')
+export class EditProfileModal extends AppElement {
   static override styles = [
     ...(<CSSResult[]>AppElement.styles),
     css`
@@ -193,16 +193,7 @@ export class PageProfileEdit extends AppElement {
       method: 'POST',
     })
       .then((res): Promise<FetchData<UserInterface> | FetchJson<'error'>> => res.json())
-      .then((data) => {
-        if (data.message) {
-          this._toastMessageSignal.request({
-            duration: 10_000,
-            message: data.message,
-            icon: data.status === 'success' ? 'checkmark-circle-outline' : 'warning-outline',
-          });
-        }
-        return data;
-      });
+      .then((data) => responseMessage<UserInterface>(data));
 
     if (response.status === 'success') {
       localStorage.setItem('token', response.data.api_token);

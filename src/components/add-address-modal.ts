@@ -1,25 +1,27 @@
 import {fetch} from '@alwatr/fetch';
+import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {InputCustomEvent, loadingController} from '@ionic/core';
+import {Task} from '@lit-labs/task';
 import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
 import {AppElement} from '../helpers/app-element';
 import {responseMessage} from '../utilities/response-message';
 
+import type {CartInterface} from '../types/cart';
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {UserInterface} from '../types/user';
-import type {ListenerInterface} from '@alwatr/signal';
 import type {TemplateResult, CSSResult} from 'lit';
 
 declare global {
   interface HTMLElementTagNameMap {
-    'page-login': PageLogin;
+    'add-address-modal': AddAddressModal;
   }
 }
 
-@customElement('page-login')
-export class PageLogin extends AppElement {
+@customElement('add-address-modal')
+export class AddAddressModal extends AppElement {
   static override styles = [
     ...(<CSSResult[]>AppElement.styles),
     css`
@@ -38,7 +40,7 @@ export class PageLogin extends AppElement {
         margin-bottom: 16px;
       }
       .image {
-        padding: 32px 8px 16px;
+        padding: 24px 10% 16px;
       }
       img {
         width: 100%;
@@ -52,78 +54,86 @@ export class PageLogin extends AppElement {
     `,
   ];
 
-  protected _listenerList: Array<unknown> = [];
   protected _inputs: Record<string, string | boolean> & {isValid: boolean} = {isValid: false};
+  protected _cartRemoveTask = new Task(this, async ([id]): Promise<void> => {
+    const bodyJson = {
+      api_token: localStorage.getItem('token') ?? '',
+      id,
+    };
+    const data = await fetch({
+      url: 'https://api.farazmed.com/api/v3/cart/remove',
+      method: 'POST',
+      body: JSON.stringify(bodyJson),
+      bodyJson,
+    })
+      .then((res) => res.json())
+      .then((data) => responseMessage<CartInterface>(data));
+
+    if (data.status === 'error') {
+      throw new Error(data.message);
+    }
+  });
 
   override connectedCallback(): void {
     super.connectedCallback();
 
-    // this._listenerList.push(router.signal.addListener(() => this.requestUpdate()));
-  }
-  override disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this._listenerList.forEach((listener) => (listener as ListenerInterface<keyof AlwatrSignals>).remove());
+    preloadIcon('close-outline');
   }
   override render(): TemplateResult {
     return html`
       <ion-header>
         <ion-toolbar color="secondary">
-          <ion-title>ورود کاربر</ion-title>
+          <ion-title>افزودن آدرس</ion-title>
+
+          <ion-buttons slot="end" @click=${this._close}>
+            <ion-button>
+              <alwatr-icon slot="icon-only" name="close-outline"></alwatr-icon>
+            </ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
+
       <ion-content fullscreen>
         <ion-card>
           <div class="image">
-            <img src="/images/log-in.svg" alt="log-in" />
+            <img src="/images/add-address.svg" alt="add-address" />
           </div>
           <ion-list>
-            <form>
-              <ion-item fill="solid">
-                <ion-label position="floating">شماره تلفن</ion-label>
-                <ion-input
-                  name="mobile"
-                  type="text"
-                  inputmode="tel"
-                  pattern="^09[0-9]{9}$"
-                  autocomplete="tel"
-                  @ionChange=${this._inputChange}
-                  clearOnEdit
-                  required
-                ></ion-input>
-                <ion-note slot="error">شماره تلفن معتبر وارد کنید</ion-note>
-              </ion-item>
-              <ion-item fill="solid">
-                <ion-label position="floating">گذرواژه</ion-label>
-                <ion-input
-                  name="password"
-                  type="password"
-                  inputmode="text"
-                  pattern="^.{3,}$"
-                  autocomplete="current-password"
-                  @ionChange=${this._inputChange}
-                  clearOnEdit
-                  required
-                ></ion-input>
-                <ion-note slot="error">گذرواژه معتبر وارد کنید</ion-note>
-              </ion-item>
-              <ion-row>
-                <ion-col size="12">
-                  <ion-button expand="block" fill="outline" @click=${this._submitForm} strong>
-                    <ion-label>ورود</ion-label>
-                  </ion-button>
-                </ion-col>
-                <ion-col size="6">
-                  <ion-button expand="block" size="small" color="tertiary" fill="clear">
-                    <ion-label>ثبت نام</ion-label>
-                  </ion-button>
-                </ion-col>
-                <ion-col size="6">
-                  <ion-button expand="block" size="small" color="tertiary" fill="clear">
-                    <ion-label>بازیابی گذرواژه</ion-label>
-                  </ion-button>
-                </ion-col>
-              </ion-row>
-            </form>
+            <ion-item fill="solid">
+              <ion-label position="floating">نام تحویل گیرنده</ion-label>
+              <ion-input
+                name="name"
+                type="text"
+                inputmode="text"
+                pattern="^.{3,}$"
+                autocomplete="name"
+                @ionChange=${this._inputChange}
+                clearOnEdit
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item fill="solid">
+              <ion-label position="floating">شماره تحویل گیرنده</ion-label>
+              <ion-input
+                name="mobile"
+                type="text"
+                inputmode="tel"
+                pattern="^09[0-9]{9}$"
+                autocomplete="tel"
+                @ionChange=${this._inputChange}
+                clearOnEdit
+                required
+              ></ion-input>
+              <ion-note slot="error">شماره تلفن معتبر وارد کنید</ion-note>
+            </ion-item>
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-button expand="block" fill="outline" strong>
+                  <ion-label>افزودن</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
           </ion-list>
         </ion-card>
       </ion-content>
@@ -183,5 +193,10 @@ export class PageLogin extends AppElement {
     } else {
       item.classList.add('ion-invalid');
     }
+  }
+  protected _close(): void {
+    const event = new CustomEvent('close');
+
+    this.dispatchEvent(event);
   }
 }

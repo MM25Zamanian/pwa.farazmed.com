@@ -1,6 +1,5 @@
 import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
-import {SignalInterface} from '@alwatr/signal';
 import {initialize} from '@ionic/core/components';
 import {css, html, nothing} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
@@ -98,7 +97,6 @@ export class AppIndex extends AppElement {
     router.initial();
   }
 
-  protected _serviceWorkerUpdate = new SignalInterface('sw-update');
   protected _cartProductCount = 0;
   protected _activePage = 'products';
   protected _listenerList: Array<unknown> = [];

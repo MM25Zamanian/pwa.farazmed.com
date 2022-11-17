@@ -46,6 +46,10 @@ const reset = css`
     color: inherit;
   }
 
+  ion-card {
+    margin: 18px;
+  }
+
   ion-accordion-group.accordion-group-expand-inset > ion-accordion:first-of-type {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
