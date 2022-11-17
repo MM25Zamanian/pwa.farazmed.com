@@ -1,12 +1,12 @@
 {
-  "short_name": "farazmed",
+  "short_name": "فرازمد",
   "name": "farazmed Shop",
   "description": "A farazmed Shop Progressive Web Application",
   "scope": "/",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#4c00b8",
-  "background_color": "#4c00b8",
+  "theme_color": "#ab41ff",
+  "background_color": "#f80b64",
   "orientation": "portrait",
   "default_locale": "en",
   "icons": [
@@ -33,12 +33,6 @@
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "/images/icon-284x284.png",
-      "sizes": "284x284",
-      "type": "image/png",
-      "purpose": "maskable"
     },
     {
       "src": "/images/icon-512x512.png",
