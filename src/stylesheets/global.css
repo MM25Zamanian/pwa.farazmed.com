@@ -194,6 +194,10 @@ html.plt-ios.plt-pwa {
   z-index: 0;
 }
 
+ion-alert input.center-text-input {
+  text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --ion-color-dark: #f4f5f8;

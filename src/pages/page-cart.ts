@@ -1,5 +1,6 @@
 import {getJson, fetch} from '@alwatr/fetch';
 import {preloadIcon} from '@alwatr/icon';
+import {alertController, modalController} from '@ionic/core';
 import {Task} from '@lit-labs/task';
 import {css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
@@ -8,10 +9,10 @@ import {map} from 'lit/directives/map.js';
 import {range} from 'lit/directives/range.js';
 
 import {AppElement} from '../helpers/app-element';
-import {AddressInterface} from '../types/address';
 import {phoneNumberFormat} from '../utilities/phone-number';
 import {responseMessage} from '../utilities/response-message';
 
+import type {AddressInterface} from '../types/address';
 import type {CartInterface, ProductCart, TotalPriceData} from '../types/cart';
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {ShipmentInterface} from '../types/shipment';
@@ -77,16 +78,24 @@ export class PageCart extends AppElement {
       ion-item.address span.number {
         direction: ltr;
       }
-      ion-item.shipment ion-label p {
+      ion-item.shipment ion-label p,
+      ion-item.product ion-label h3 {
         white-space: normal;
         line-height: normal;
       }
-    `,
-    css`
-      .discount {
+      ion-item.product ion-buttons {
+        flex-direction: column;
+      }
+      ion-item ion-label * {
         display: flex;
         gap: 8px;
+        align-items: baseline;
       }
+      .header-have-item {
+        padding: 8px 0;
+      }
+    `,
+    css`
       ins,
       del {
         display: inline-flex;
@@ -132,6 +141,26 @@ export class PageCart extends AppElement {
     },
     () => []
   );
+  protected _addressDeleteTask = new Task(this, async ([id]): Promise<void> => {
+    const bodyJson = {
+      api_token: localStorage.getItem('token') ?? '',
+      id,
+    };
+    const data = await fetch({
+      url: 'https://api.farazmed.com/api/v3/address/delete',
+      method: 'POST',
+      body: JSON.stringify(bodyJson),
+      bodyJson,
+    })
+      .then((response) => response.json())
+      .then((data) => responseMessage<undefined>(data));
+
+    if (data.status === 'error') {
+      throw new Error(data.message);
+    }
+
+    this._addressListTask.run();
+  });
   protected _shipmentListTask = new Task(
     this,
     async (): Promise<FetchData<ShipmentInterface[]>> => {
@@ -208,8 +237,10 @@ export class PageCart extends AppElement {
   override connectedCallback(): void {
     super.connectedCallback();
 
+    preloadIcon('add-outline');
     preloadIcon('close-outline');
     preloadIcon('card-outline');
+    preloadIcon('create-outline');
   }
   override render(): TemplateResult {
     return html`
@@ -257,34 +288,45 @@ export class PageCart extends AppElement {
     const image =
       product.ProductInfo.imageElem ??
       html`<img src=${product.ProductInfo.image} alt=${product.ProductInfo.en_name} />`;
-    const price = product.totalPrice.oldPrice.toLocaleString('fa');
-    const discount = product.totalPrice.totalPrice.toLocaleString('fa');
+    const oldPrice = product.totalPrice.oldPrice;
+    const discount = product.totalPrice.totalPrice;
 
     const isDiscount =
       product.totalPrice.totalDiscount != 0 && product.totalPrice.totalPrice != product.totalPrice.oldPrice;
 
     const discountTemplate = isDiscount
       ? html`
-          <del>${price}</del>
-          <ins>${discount}</ins>
+          <del>${(oldPrice * product.quantityInCart).toLocaleString('fa-IR')}</del>
+          <ins>${(discount * product.quantityInCart).toLocaleString('fa-IR')}</ins>
         `
-      : html`<ins>${price}</ins>`;
+      : html`<ins>${(oldPrice * product.quantityInCart).toLocaleString('fa-IR')}</ins>`;
 
     const delCart = (event: PointerEvent): void => {
       event.preventDefault();
       this._cartRemoveTask.run([product.cart_id]);
     };
+    const editCart = (event: PointerEvent): void => {
+      event.preventDefault();
+      this._editQTY(product);
+    };
 
     return html`
-      <ion-item .lines=${index === total - 1 ? 'none' : undefined}>
+      <ion-item class="product" .lines=${index === total - 1 ? 'none' : undefined}>
         <ion-thumbnail slot="start"> ${image} </ion-thumbnail>
 
         <ion-label>
           <h3>${product.ProductInfo.fa_name}</h3>
-          <div class="discount">${discountTemplate}</div>
+          <h4 class="discount">قیمت: ${discountTemplate}</h4>
+          <h4>
+            تعداد:
+            <span>${product.quantityInCart.toLocaleString('fa-IR')}</span>
+          </h4>
         </ion-label>
 
         <ion-buttons slot="end">
+          <ion-button color="tertiary" @click=${editCart}>
+            <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="create-outline"></alwatr-icon>
+          </ion-button>
           <ion-button color="danger" @click=${delCart}>
             <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="close-outline"></alwatr-icon>
           </ion-button>
@@ -345,9 +387,14 @@ export class PageCart extends AppElement {
     `;
   }
   protected _renderAddressListCard(addressList: AddressInterface[]): TemplateResult {
-    const addressListTemplate = map(
-      addressList,
-      (address, index) => html`
+    const addAddressOpen = this._openModalFunc('add-address-modal');
+    const addressListTemplate = map(addressList, (address, index) => {
+      const delAddress = (event: PointerEvent): void => {
+        event.preventDefault();
+        this._addressDeleteTask.run([address.id]);
+      };
+
+      return html`
         <ion-item class="address" .lines=${index === addressList.length - 1 ? 'none' : undefined}>
           <ion-radio slot="start" value=${address.id}></ion-radio>
           <ion-label>
@@ -362,14 +409,33 @@ export class PageCart extends AppElement {
               ${address.addr}
             </h4>
           </ion-label>
+          <ion-buttons slot="end">
+            <ion-button color="danger" @click=${delAddress}>
+              <alwatr-icon slot="icon-only" name="close-outline"></alwatr-icon>
+            </ion-button>
+          </ion-buttons>
         </ion-item>
-      `
-    );
+      `;
+    });
 
     return html`
       <ion-card>
-        <ion-card-header>
-          <ion-card-title>انتخاب آدرس</ion-card-title>
+        <ion-card-header class="header-have-item">
+          <ion-item lines="none">
+            <ion-card-title>انتخاب آدرس</ion-card-title>
+
+            <ion-buttons slot="end">
+              <ion-button color="tertiary">
+                <alwatr-icon
+                  flip-rtl
+                  dir="rtl"
+                  slot="icon-only"
+                  name="add-outline"
+                  @click=${addAddressOpen}
+                ></alwatr-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
         </ion-card-header>
 
         <ion-list lines="full">
@@ -461,5 +527,58 @@ export class PageCart extends AppElement {
     if (newAddress) {
       this._address = newAddress;
     }
+  }
+  protected _openModalFunc(component: string): (event: PointerEvent) => void {
+    return (event: PointerEvent): void => {
+      event.preventDefault();
+
+      const modalComponent = document.createElement(component);
+      modalController
+        .create({
+          component: modalComponent,
+          animated: true,
+        })
+        .then(async (modal) => {
+          modalComponent.addEventListener('close', () => {
+            modal.dismiss();
+          });
+          return await modal.present();
+        });
+    };
+  }
+  protected async _editQTY(product: ProductCart): Promise<void> {
+    const alert = await alertController
+      .create({
+        animated: true,
+        header: product.ProductInfo.fa_name,
+        inputs: [
+          {
+            min: 1,
+            label: 'تعداد',
+            type: 'number',
+            name: 'quantity',
+            value: product.quantityInCart,
+            max: product.ProductInfo.quantity,
+            placeholder: 'تعداد سفارش خود را وارد کنید',
+            cssClass: 'center-text-input',
+          },
+        ],
+        buttons: [
+          {
+            text: 'تایید',
+            role: 'confirm',
+          },
+          {
+            text: 'لغو',
+            role: 'destroy',
+          },
+        ],
+      })
+      .then(async (_alert) => {
+        await _alert.present();
+        return await _alert.onWillDismiss<{quantity: number}>();
+      });
+
+    this._logger.logMethodArgs('_editQTY', {...alert, product});
   }
 }

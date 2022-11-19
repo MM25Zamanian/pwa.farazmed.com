@@ -2,7 +2,7 @@ import {getJson} from '@alwatr/fetch';
 import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {Task} from '@lit-labs/task';
-import {css, html, nothing} from 'lit';
+import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 import {map} from 'lit/directives/map.js';
 import {range} from 'lit/directives/range.js';
@@ -15,8 +15,7 @@ import '../components/pc-ard';
 
 import type {Links, ResponseProducts} from '../types/fetch';
 import type {ProductInterface} from '../types/product';
-import type {TemplateResult, CSSResult} from 'lit';
-
+import type {TemplateResult, CSSResult, nothing} from 'lit';
 
 declare global {
   interface HTMLElementTagNameMap {

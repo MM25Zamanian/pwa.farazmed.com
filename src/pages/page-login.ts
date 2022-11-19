@@ -1,6 +1,6 @@
 import {fetch} from '@alwatr/fetch';
 import {router} from '@alwatr/router';
-import {InputCustomEvent, loadingController} from '@ionic/core';
+import {loadingController} from '@ionic/core';
 import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
@@ -10,6 +10,7 @@ import {responseMessage} from '../utilities/response-message';
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {UserInterface} from '../types/user';
 import type {ListenerInterface} from '@alwatr/signal';
+import type {InputCustomEvent} from '@ionic/core';
 import type {TemplateResult, CSSResult} from 'lit';
 
 declare global {

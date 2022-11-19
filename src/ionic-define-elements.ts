@@ -1,3 +1,4 @@
+import {defineCustomElement as ionAlert} from '@ionic/core/components/ion-alert.js';
 import {defineCustomElement as ionApp} from '@ionic/core/components/ion-app.js';
 import {defineCustomElement as ionAvatar} from '@ionic/core/components/ion-avatar.js';
 import {defineCustomElement as ionBackdrop} from '@ionic/core/components/ion-backdrop.js';
@@ -39,7 +40,9 @@ import {defineCustomElement as ionToolbar} from '@ionic/core/components/ion-tool
 
 export const defineCustomElement = (): void => {
   ionApp();
+  ionAlert();
   ionAvatar();
+  ionBackdrop();
   ionButton();
   ionButtons();
   ionCard();
@@ -55,8 +58,10 @@ export const defineCustomElement = (): void => {
   ionInput();
   ionItem();
   ionLabel();
+  ionLoading();
   ionList();
   ionListHeader();
+  ionModal();
   ionNote();
   ionRadio();
   ionRadioGroup();
@@ -72,8 +77,5 @@ export const defineCustomElement = (): void => {
   ionThumbnail();
   ionTitle();
   ionToolbar();
-  ionLoading();
   ionToast();
-  ionModal();
-  ionBackdrop();
 };

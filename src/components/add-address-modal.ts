@@ -1,7 +1,7 @@
 import {fetch} from '@alwatr/fetch';
 import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
-import {InputCustomEvent, loadingController} from '@ionic/core';
+import {loadingController} from '@ionic/core';
 import {Task} from '@lit-labs/task';
 import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
@@ -12,6 +12,7 @@ import {responseMessage} from '../utilities/response-message';
 import type {CartInterface} from '../types/cart';
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {UserInterface} from '../types/user';
+import type {InputCustomEvent} from '@ionic/core';
 import type {TemplateResult, CSSResult} from 'lit';
 
 declare global {

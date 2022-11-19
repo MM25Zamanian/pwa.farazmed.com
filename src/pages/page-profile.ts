@@ -10,16 +10,17 @@ import {map} from 'lit/directives/map.js';
 import {range} from 'lit/directives/range.js';
 
 import {AppElement} from '../helpers/app-element';
-import {OrderInterface} from '../types/order';
 import {bankNumberFormat} from '../utilities/bank-number';
 import {phoneNumberFormat} from '../utilities/phone-number';
 import {responseMessage} from '../utilities/response-message';
 
 import '../components/pc-ard';
 import '../components/add-address-modal';
+import '../components/edit-profile-modal';
 
 import type {AddressInterface} from '../types/address';
 import type {FetchData, FetchJson} from '../types/fetch';
+import type {OrderInterface} from '../types/order';
 import type {FavoriteProductInterface} from '../types/product';
 import type {UserInterface} from '../types/user';
 import type {TemplateResult, CSSResult} from 'lit';
@@ -75,6 +76,11 @@ export class PageProfile extends AppElement {
       }
       ion-item.images ion-row ion-thumbnail:last-child {
         border: none;
+      }
+      ion-item ion-label h2,
+      ion-item ion-label h3,
+      ion-item ion-label h4 {
+        white-space: normal;
       }
     `,
   ];
@@ -358,7 +364,13 @@ export class PageProfile extends AppElement {
 
             <ion-buttons slot="end">
               <ion-button color="tertiary">
-                <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="settings-outline"></alwatr-icon>
+                <alwatr-icon
+                  flip-rtl
+                  dir="rtl"
+                  slot="icon-only"
+                  name="settings-outline"
+                  @click=${this._openModalFunc('edit-profile-modal')}
+                ></alwatr-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>
@@ -483,7 +495,7 @@ export class PageProfile extends AppElement {
 
         <ion-label>
           <h2>${product.fa_name}</h2>
-          <h3>${product.en_name}</h3>
+          <p>${product.en_name}</p>
         </ion-label>
 
         <ion-buttons slot="end" class="ion-no-margin">
@@ -527,10 +539,11 @@ export class PageProfile extends AppElement {
 
     return html`
       <ion-item lines="none">
-        <ion-label slot="start">
+        <ion-label slot="start" class="ion-no-margin ion-margin-vertical ion-padding-start">
           <h3>سفارش کد ${order.uniqid}</h3>
+          <p>${this._dateString(order.created_at)}</p>
         </ion-label>
-        <ion-label slot="end">
+        <ion-label slot="end" class="ion-no-margin ion-margin-vertical ion-padding-end">
           <h3>${order.price.toLocaleString('fa-IR')} تومان</h3>
         </ion-label>
       </ion-item>
@@ -556,5 +569,10 @@ export class PageProfile extends AppElement {
           return await modal.present();
         });
     };
+  }
+  protected _dateString(date: string): string {
+    return new Date(date).toLocaleString('fa-IR', {
+      dateStyle: 'long',
+    });
   }
 }

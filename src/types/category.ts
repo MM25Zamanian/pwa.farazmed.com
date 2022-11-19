@@ -1,4 +1,4 @@
-import {MultiLanguageStringType} from './language';
+import type {MultiLanguageStringType} from './language';
 
 export interface CategoryInterface {
   _id: string;

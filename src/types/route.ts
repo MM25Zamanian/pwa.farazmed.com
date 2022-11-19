@@ -1,6 +1,5 @@
-import {TemplateResult} from 'lit';
-
 import type {Route as AlwatrRoute} from '@alwatr/router';
+import type {TemplateResult} from 'lit';
 
 export type Route = {
   title: string;

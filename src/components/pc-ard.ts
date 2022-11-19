@@ -43,7 +43,7 @@ export class ProductCard extends AppElement {
         font-weight: 300;
       }
       img {
-        padding: .5em 1em 0;
+        padding: 0.5em 1em 0;
       }
     `,
     css`

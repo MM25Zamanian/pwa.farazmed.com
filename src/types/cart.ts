@@ -1,4 +1,4 @@
-import {ProductInterface} from './product';
+import type {ProductInterface} from './product';
 
 export interface CartInterface extends Record<string, unknown> {
   products: ProductCart[];
@@ -8,6 +8,7 @@ export interface CartInterface extends Record<string, unknown> {
 
 export interface ProductCart {
   cart_id: number;
+  quantityInCart: number;
   ProductInfo: ProductInterface;
   ProductVariantInfo: ProductVariantInfo;
   variantAttrInfo: VariantAttrInfo;

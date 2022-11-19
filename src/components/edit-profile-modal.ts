@@ -1,8 +1,8 @@
 import {fetch, getJson} from '@alwatr/fetch';
-import { preloadIcon } from '@alwatr/icon';
+import {preloadIcon} from '@alwatr/icon';
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
-import {InputCustomEvent, loadingController} from '@ionic/core';
+import {loadingController} from '@ionic/core';
 import {Task} from '@lit-labs/task';
 import {css, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
@@ -12,6 +12,7 @@ import {responseMessage} from '../utilities/response-message';
 
 import type {FetchData, FetchJson} from '../types/fetch';
 import type {UserInterface} from '../types/user';
+import type {InputCustomEvent} from '@ionic/core';
 import type {TemplateResult, CSSResult} from 'lit';
 
 declare global {
@@ -84,7 +85,7 @@ export class EditProfileModal extends AppElement {
   override connectedCallback(): void {
     super.connectedCallback();
 
-    preloadIcon('arrow-forward-outline');
+    preloadIcon('close-outline');
   }
   override render(): TemplateResult {
     return html`
@@ -92,7 +93,7 @@ export class EditProfileModal extends AppElement {
         <ion-toolbar color="secondary">
           <ion-buttons slot="end">
             <ion-button href=${router.makeUrl({sectionList: ['profile']})}>
-              <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="arrow-forward-outline"></alwatr-icon>
+              <alwatr-icon flip-rtl dir="rtl" slot="icon-only" name="close-outline" @click=${this._close}></alwatr-icon>
             </ion-button>
           </ion-buttons>
 
@@ -219,5 +220,10 @@ export class EditProfileModal extends AppElement {
     } else {
       item.classList.add('ion-invalid');
     }
+  }
+  protected _close(): void {
+    const event = new CustomEvent('close');
+
+    this.dispatchEvent(event);
   }
 }

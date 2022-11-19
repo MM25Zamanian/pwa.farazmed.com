@@ -137,7 +137,7 @@ export class AppIndex extends AppElement {
   }
   override render(): TemplateResult {
     return html`
-      <ion-content class="page-container"> ${cache(router.outlet(this._routes))} </ion-content>
+      <ion-content class="page-container"> ${router.outlet(this._routes)} </ion-content>
       ${cache(this._renderTabBar())}
     `;
   }

@@ -158,7 +158,7 @@ export class PageProductDetail extends AppElement {
   override render(): TemplateResult {
     return html`
       ${this._apiTask.render({
-        pending: () => html`loading ...`,
+        pending: () => this._renderSkeleton(),
         complete: (productFetch: ResponseProducts<ProductInterface> | null) => {
           this._logger.logMethodArgs('_apiTask', {productFetch});
 
@@ -299,6 +299,26 @@ export class PageProductDetail extends AppElement {
           ${variantsTemplate}
         </ion-segment>
       </div>
+    `;
+  }
+  protected _renderSkeleton(): TemplateResult {
+    return html`
+      <ion-content fullscreen>
+        <ion-thumbnail style="--size:100vw;">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </ion-card-title>
+          <ion-card-subtitle>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-content>
     `;
   }
 
