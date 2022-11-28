@@ -38,7 +38,7 @@
     "@alwatr/logger": "^0.21.0",
     "@alwatr/math": "^0.21.0",
     "@alwatr/router": "^0.21.0",
-    "@alwatr/signal": "^0.21.0",
+    "@alwatr/signal": "^0.24.0",
     "@capacitor/android": "^4.4.0",
     "@capacitor/core": "^4.4.0",
     "@ionic/core": "^6.3.6",
