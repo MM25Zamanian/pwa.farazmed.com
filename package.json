@@ -55,7 +55,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
     "@capacitor/cli": "^4.4.0",
-    "@rollup/plugin-babel": "^6.0.2",
+    "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
