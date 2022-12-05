@@ -11,6 +11,15 @@
     lit "^2.4.1"
     tslib "^2.4.1"
 
+"@alwatr/element@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/element/-/element-0.24.1.tgz#3b9675fb4b81952cddf08393c714697c34e6f56a"
+  integrity sha512-iOmOgeQMAlgjyaqf14rEmd9Bb3nIRr45qHp5GelFMOq6OcpF6cMl9tyNblow48mwRLmZg7CdeJUGVvZ+KZaRow==
+  dependencies:
+    "@alwatr/logger" "^0.24.1"
+    lit "~2.4.1"
+    tslib "~2.4.1"
+
 "@alwatr/fetch@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@alwatr/fetch/-/fetch-0.21.0.tgz#d1cbc1cb9b32cacc6403b117c50e84cf689583ee"
@@ -19,19 +28,28 @@
     "@alwatr/logger" "^0.21.0"
     tslib "^2.4.1"
 
+"@alwatr/fetch@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/fetch/-/fetch-0.24.1.tgz#76c6864e66dd3c2d5ab9ed37df9c00ec72800771"
+  integrity sha512-1OOBZrXy47sPNYPglkdUEqhfI72lwAMg3poaAxj7j/LX0FN2JK61k0x6JuGZ++UjIMt679ObEBNP500rSUWmYA==
+  dependencies:
+    "@alwatr/logger" "^0.24.1"
+    tslib "~2.4.1"
+
 "@alwatr/font@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@alwatr/font/-/font-0.21.0.tgz#ae4e3cedf56af104665eaa2e4512d1cdb17a946c"
   integrity sha512-iaQjtlRVe9p7l6Gpm5/UF6xn0Cht3zogmh6hk2uEhWrD/mA9M7TXgWv8YYfo0ZflozZ1DONxEA11khNHELKvbw==
 
-"@alwatr/icon@^0.21.0":
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/@alwatr/icon/-/icon-0.21.0.tgz#337984039d2017197bdd03a807693292c1904aec"
-  integrity sha512-uzL80kLFgMLRu2v9cs3KiSGKLv/1DWjOAL1curM6qbEHOQAbOkLQyky5/9dlbiWFdoFwTDxG3OLxN5jRQmHVKA==
+"@alwatr/icon@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/icon/-/icon-0.24.1.tgz#4fc69629750eb7b797fb78a5d837fe4dff3cf962"
+  integrity sha512-WnDWAMagn/M/GxK4DO4OGdET3HDX5ZuQaGnI9S8wVrLJW+uRllRk/zYu59/moRNdA/rWYzDBcqg5CchgVoFh7w==
   dependencies:
-    "@alwatr/element" "^0.21.0"
-    lit "^2.4.1"
-    tslib "^2.4.1"
+    "@alwatr/element" "^0.24.1"
+    "@alwatr/fetch" "^0.24.1"
+    lit "~2.4.1"
+    tslib "~2.4.1"
 
 "@alwatr/logger@^0.21.0":
   version "0.21.0"
@@ -39,6 +57,13 @@
   integrity sha512-uoAKvxQHi4ymqP5c1Mn+qaOlo340RHZEbQKXDzNhDpb88QgXxgLRJplY2QPxSEohne4MGzgMXEJkN8GHn+Qzgg==
   dependencies:
     tslib "^2.4.1"
+
+"@alwatr/logger@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/logger/-/logger-0.24.1.tgz#796300ee9c7005a6534f7f124bc177e14241d52c"
+  integrity sha512-co3sqGIJ3gm1ILvNE5JI65q/FhF+YnX+OgET0mbRZOa4uvJAZANwip72ozKJlUOCeaIR+BgZWPOV26u4bIMw+g==
+  dependencies:
+    tslib "~2.4.1"
 
 "@alwatr/math@^0.21.0":
   version "0.21.0"
@@ -6454,7 +6479,7 @@ lit-html@^2.2.0, lit-html@^2.4.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit@^2.0.0, lit@^2.4.1:
+lit@^2.0.0, lit@^2.4.1, lit@~2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/lit/-/lit-2.4.1.tgz#21251ac14eb1ec8ca7cd15c9ac3564359809f7b5"
   integrity sha512-qohSgLiyN1cFnJG26dIiY03S4F49857A0AHQfnS0zYtnUVnD2MFvx+UT52rtXsIuNFQrnUupX+zyGSATlk1f/A==
@@ -8998,7 +9023,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1:
+tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1, tslib@~2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
