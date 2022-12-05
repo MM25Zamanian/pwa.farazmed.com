@@ -36,7 +36,7 @@
     "@alwatr/font": "^0.21.0",
     "@alwatr/icon": "^0.21.0",
     "@alwatr/logger": "^0.21.0",
-    "@alwatr/math": "^0.21.0",
+    "@alwatr/math": "^0.24.1",
     "@alwatr/router": "^0.21.0",
     "@alwatr/signal": "^0.21.0",
     "@capacitor/android": "^4.4.0",
