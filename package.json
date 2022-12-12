@@ -34,7 +34,7 @@
     "@alwatr/element": "^0.21.0",
     "@alwatr/fetch": "^0.21.0",
     "@alwatr/font": "^0.21.0",
-    "@alwatr/icon": "^0.21.0",
+    "@alwatr/icon": "^0.25.0",
     "@alwatr/logger": "^0.21.0",
     "@alwatr/math": "^0.21.0",
     "@alwatr/router": "^0.21.0",
