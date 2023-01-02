@@ -11,6 +11,16 @@
     lit "^2.4.1"
     tslib "^2.4.1"
 
+"@alwatr/element@^0.26.1":
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/element/-/element-0.26.1.tgz#00c069c44de05de4b1edf3dfaa536fe95c976975"
+  integrity sha512-IdeNQeHsCmSOj1todXqCfBzWuixaLCAW5T/FsUB/oM8p7rgsGLHChEDRPpA847kJ5S3TbTwncJKEJsFYwSaL4w==
+  dependencies:
+    "@alwatr/logger" "^0.26.1"
+    "@alwatr/signal" "^0.26.1"
+    lit "~2.5.0"
+    tslib "~2.4.1"
+
 "@alwatr/fetch@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@alwatr/fetch/-/fetch-0.21.0.tgz#d1cbc1cb9b32cacc6403b117c50e84cf689583ee"
@@ -19,19 +29,28 @@
     "@alwatr/logger" "^0.21.0"
     tslib "^2.4.1"
 
+"@alwatr/fetch@^0.26.1":
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/fetch/-/fetch-0.26.1.tgz#e41fbcd4af5f2dcd56b8544374b3c13ee32a9fbd"
+  integrity sha512-P/7jvghnoPz1Imt0gVp5GZjveFsvFrmQV9pxVlbIs5l2Akj7UG6Jx0aqsbEC4NaKMadxVQI3hp2K7/2qp7fhkg==
+  dependencies:
+    "@alwatr/logger" "^0.26.1"
+    tslib "~2.4.1"
+
 "@alwatr/font@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@alwatr/font/-/font-0.21.0.tgz#ae4e3cedf56af104665eaa2e4512d1cdb17a946c"
   integrity sha512-iaQjtlRVe9p7l6Gpm5/UF6xn0Cht3zogmh6hk2uEhWrD/mA9M7TXgWv8YYfo0ZflozZ1DONxEA11khNHELKvbw==
 
-"@alwatr/icon@^0.21.0":
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/@alwatr/icon/-/icon-0.21.0.tgz#337984039d2017197bdd03a807693292c1904aec"
-  integrity sha512-uzL80kLFgMLRu2v9cs3KiSGKLv/1DWjOAL1curM6qbEHOQAbOkLQyky5/9dlbiWFdoFwTDxG3OLxN5jRQmHVKA==
+"@alwatr/icon@^0.26.1":
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/icon/-/icon-0.26.1.tgz#48ba4ee5c097418fbf9ba2a6ef3f1a8cd4d6437b"
+  integrity sha512-UJKrqEOjiDUdz5QCS6pUds0d6m42LhQYl77ZcjE2NxeIw/3Cya+u2Yx9t1LhZ5b04RvcDV2gHbs9oRTQylc5dg==
   dependencies:
-    "@alwatr/element" "^0.21.0"
-    lit "^2.4.1"
-    tslib "^2.4.1"
+    "@alwatr/element" "^0.26.1"
+    "@alwatr/fetch" "^0.26.1"
+    lit "~2.5.0"
+    tslib "~2.4.1"
 
 "@alwatr/logger@^0.21.0":
   version "0.21.0"
@@ -39,6 +58,13 @@
   integrity sha512-uoAKvxQHi4ymqP5c1Mn+qaOlo340RHZEbQKXDzNhDpb88QgXxgLRJplY2QPxSEohne4MGzgMXEJkN8GHn+Qzgg==
   dependencies:
     tslib "^2.4.1"
+
+"@alwatr/logger@^0.26.1":
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/logger/-/logger-0.26.1.tgz#7cdcc13498bce0df85945cfcf982f3cd775d69b2"
+  integrity sha512-PKGUpNMx4pDulZQ7+LUzHPcyftEkKcLkWwvFWiaRTS6mFndC3aVpt5bXwx6zEFonTrCWgur8nKYsoSxCsdQi4Q==
+  dependencies:
+    tslib "~2.4.1"
 
 "@alwatr/math@^0.21.0":
   version "0.21.0"
@@ -63,6 +89,14 @@
   dependencies:
     "@alwatr/logger" "^0.21.0"
     tslib "^2.4.1"
+
+"@alwatr/signal@^0.26.1":
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/@alwatr/signal/-/signal-0.26.1.tgz#dcd1699612b72e8edf47e0e786dfa0981221530a"
+  integrity sha512-yn6V+lwMrxqc4my+DZY3CFlPmcLnwGkZxWVT5w1rHRTK7vb4NU9jzsCp1I/yFxjA0ZHpKUfslCo1mp+2uO2o2w==
+  dependencies:
+    "@alwatr/logger" "^0.26.1"
+    tslib "~2.4.1"
 
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
@@ -1900,10 +1934,15 @@
   dependencies:
     "@lit/reactive-element" "^1.1.0"
 
-"@lit/reactive-element@^1.1.0", "@lit/reactive-element@^1.3.0", "@lit/reactive-element@^1.4.0":
+"@lit/reactive-element@^1.1.0", "@lit/reactive-element@^1.3.0":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.4.2.tgz#65d659e89d1a7e2f4f2b547182aef0a224f4adb7"
   integrity sha512-VMOxsWh/QDwrxPsgkSQnuZ+8mfNy1OTjzzUdLBvvZtpahwPTHTeVZ51RZRqO4xfKVrR+btIPA8D01IL3xeG66w==
+
+"@lit/reactive-element@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.5.0.tgz#344cc33f2d1491d094b8ef824a9fe31d150d2375"
+  integrity sha512-fQh9FDK0LPTwDk+0HhSZEtb8K0LTN1wXerwpGrWA+a8tWulYRDLI4vQDWp4GOIsewn0572KYV/oZ3+492D7osA==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -6447,21 +6486,28 @@ lit-element@^3.2.0:
     "@lit/reactive-element" "^1.3.0"
     lit-html "^2.2.0"
 
-lit-html@^2.2.0, lit-html@^2.4.0:
+lit-html@^2.2.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.4.0.tgz#b510430f39a56ec959167ed1187241a4e3ab1574"
   integrity sha512-G6qXu4JNUpY6aaF2VMfaszhO9hlWw0hOTRFDmuMheg/nDYGB+2RztUSOyrzALAbr8Nh0Y7qjhYkReh3rPnplVg==
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit@^2.0.0, lit@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-2.4.1.tgz#21251ac14eb1ec8ca7cd15c9ac3564359809f7b5"
-  integrity sha512-qohSgLiyN1cFnJG26dIiY03S4F49857A0AHQfnS0zYtnUVnD2MFvx+UT52rtXsIuNFQrnUupX+zyGSATlk1f/A==
+lit-html@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.5.0.tgz#9d4c0bb3652a6b10bc4ccdb627dfa9eff1215474"
+  integrity sha512-bLHosg1XL3JRUcKdSVI0sLCs0y1wWrj2sqqAN3cZ7bDDPNgmDHH29RV48x6Wz3ZmkxIupaE+z7uXSZ/pXWAO1g==
   dependencies:
-    "@lit/reactive-element" "^1.4.0"
+    "@types/trusted-types" "^2.0.2"
+
+lit@^2.0.0, lit@^2.4.1, lit@~2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/lit/-/lit-2.5.0.tgz#3a425d69ff8483effb2026957b86ae45de0bc51a"
+  integrity sha512-DtnUP6vR3l4Q8nRPPNBD+UxbAhwJPeky+OVbi3pdgMqm0g57xFSl1Sj64D1rIB+nVNdiVVg8YxB0hqKjvdadZA==
+  dependencies:
+    "@lit/reactive-element" "^1.5.0"
     lit-element "^3.2.0"
-    lit-html "^2.4.0"
+    lit-html "^2.5.0"
 
 load-json-file@^4.0.0:
   version "4.0.0"
@@ -8998,7 +9044,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1:
+tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1, tslib@~2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
